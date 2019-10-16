@@ -9,7 +9,7 @@ function createGrid(size) {
     let div = document.createElement('div');
     // div.innerHTML = i;
     div.classList.add('pixel');
-    div.addEventListener('mouseover', vanish)
+    div.addEventListener('mouseenter', vanish);
     container.appendChild(div);
   }
 
@@ -55,6 +55,7 @@ function resetGrid() {
     node.classList.remove('hidden');
     node.style.backgroundColor = '#26173f';
     node.style.borderColor = `seagreen`;
+    node.style.opacity = 1;
     }
   );
 }
@@ -72,33 +73,82 @@ function resizeGrid() {
   } else {
     return
   }
+
+  if (randomColorsActivated) {
+    RandomColor();
+    RandomColor();
+  } else if (gradientActivated) {
+    Gradient();
+    Gradient();
+  }
 }
 
-function randomColors() {
+function RandomColor() {
+  if (gradientActivated) {      // only one mode can be activated at a time
+    Gradient();
+  }
+
   const pixels = document.querySelectorAll('.pixel');
   randomColorsActivated = !randomColorsActivated;
   randomColorButton.classList.toggle('activeButton');
 
   if (randomColorsActivated) {
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseover', vanish);
-      pixel.addEventListener('mouseover', randomColor);
+      pixel.removeEventListener('mouseenter', vanish);
+      pixel.addEventListener('mouseenter', randomColor);
     });
   } else {
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseover', randomColor);
-      pixel.addEventListener('mouseover', vanish);
+      pixel.removeEventListener('mouseenter', randomColor);
+      pixel.addEventListener('mouseenter', vanish);
     });
   }
+}
 
-  function randomColor(e) {
-    if (e.ctrlKey) {
-      return
-    } else {
-      e.target.style.backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
-      e.target.style.borderColor = 'transparent';
-    }
-    
+function randomColor(e) {
+  if (e.ctrlKey) {
+    return
+  } else {
+    e.target.style.transition = 'all 0.7s ease-out';
+    e.target.style.opacity = 1;
+    e.target.style.backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
+    e.target.style.borderColor = 'transparent';
+  }
+}
+
+function Gradient() {
+  if (randomColorsActivated) {    // only one mode can be activated at a time
+    RandomColor();
+  }
+
+  const pixels = document.querySelectorAll('.pixel');
+  gradientActivated = !gradientActivated;
+  gradientButton.classList.toggle('activeButton');
+
+  if (gradientActivated) {
+    pixels.forEach((pixel) => {
+      pixel.removeEventListener('mouseenter', vanish);
+      pixel.addEventListener('mouseenter', gradient);
+    });
+  } else {
+    pixels.forEach((pixel) => {
+      pixel.removeEventListener('mouseenter', gradient);
+      pixel.addEventListener('mouseenter', vanish);
+    });
+  }
+}
+
+function gradient(e) {
+  if (e.ctrlKey) {
+    return
+  } else if (e.target.style.backgroundColor !== 'black') {
+    e.target.style.transition = 'none';
+    e.target.style.opacity = 0.1;
+    e.target.style.backgroundColor = 'black'; 
+    e.target.style.borderColor = 'transparent';
+  } else {
+    e.target.style.transition = 'all 0.7s ease-out';
+    e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
   }
 }
 
@@ -106,9 +156,11 @@ function randomColors() {
 let gridSize = 16;
 let pixelBorderWidth = 1;
 let randomColorsActivated = false;
+let gradientActivated = false;
 
 resetButton.addEventListener('click', resetGrid);
 resizeButton.addEventListener('click', resizeGrid);
-randomColorButton.addEventListener('click', randomColors);
+randomColorButton.addEventListener('click', RandomColor);
+gradientButton.addEventListener('click', Gradient);
 createGrid(gridSize);
 
