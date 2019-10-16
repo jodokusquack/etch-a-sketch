@@ -16,6 +16,27 @@ h1 {
   margin-bottom: 30px;
 }
 
+#controls button {
+  padding: 15px;
+  margin: 0.5em;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+#controls button:hover {
+  border: 1px solid orange;
+  box-shadow: 0 0 10px orange;
+  background-color: rgb(212, 186, 186);
+}
+
+#controls .activeButton {
+  background-color: darkslategray;
+  color: white;
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
 #wrapper {
   display: inline-block;
   /* background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -23,14 +44,6 @@ h1 {
   border: 3px solid purple;
   border-radius: 10px;
 }
-
-#container {
-  
-}
-
-#container .pixel {
-  
-} 
 
 #container .hidden {
   background-color: transparent;

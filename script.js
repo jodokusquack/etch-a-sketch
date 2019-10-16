@@ -76,11 +76,20 @@ function resizeGrid() {
 
 function randomColors() {
   const pixels = document.querySelectorAll('.pixel');
+  randomColorsActivated = !randomColorsActivated;
+  randomColorButton.classList.toggle('activeButton');
 
-  pixels.forEach((pixel) => {
-    pixel.removeEventListener('mouseover', vanish);
-    pixel.addEventListener('mouseover', randomColor);
-  })
+  if (randomColorsActivated) {
+    pixels.forEach((pixel) => {
+      pixel.removeEventListener('mouseover', vanish);
+      pixel.addEventListener('mouseover', randomColor);
+    });
+  } else {
+    pixels.forEach((pixel) => {
+      pixel.removeEventListener('mouseover', randomColor);
+      pixel.addEventListener('mouseover', vanish);
+    });
+  }
 
   function randomColor(e) {
     if (e.ctrlKey) {
@@ -96,6 +105,7 @@ function randomColors() {
 
 let gridSize = 16;
 let pixelBorderWidth = 1;
+let randomColorsActivated = false;
 
 resetButton.addEventListener('click', resetGrid);
 resizeButton.addEventListener('click', resizeGrid);
