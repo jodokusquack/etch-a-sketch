@@ -18,7 +18,8 @@ h1 {
 
 #wrapper {
   display: inline-block;
-  background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: white;
   border: 3px solid purple;
   border-radius: 10px;
 }
@@ -28,7 +29,7 @@ h1 {
 }
 
 #container .pixel {
-  transition: all 0.7s ease-out;
+  
 } 
 
 #container .hidden {
