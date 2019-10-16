@@ -59,8 +59,8 @@ function resetGrid() {
 }
 
 function resizeGrid() {
-  gridSize = prompt('Please enter a size for the new Grid. (Between 1 and 64)');
-  if (gridSize > 1000) {
+  gridSize = prompt('Please enter a size for the new Grid. (Between 1 and 128)');
+  if (gridSize > 128) {
     resizeGrid();
   } else if (gridSize && (typeof Number(gridSize) === 'number')) {
     while(container.firstChild) {                           // Remove old divs and redraw the grid only if a number lower than 65 was entered
