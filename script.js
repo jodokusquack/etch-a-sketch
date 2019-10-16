@@ -8,7 +8,7 @@ function createGrid(size) {
   for (let i = 0; i < (size**2); i++) {
     let div = document.createElement('div');
     div.classList.add('pixel');                               // Give every little div the class .pixel
-    div.addEventListener('mouseenter', vanish);               // attach the default EventListener
+    div.addEventListener('mouseover', vanish);               // attach the default EventListener
     container.appendChild(div);                               // Append Elements to container
   }
 
@@ -60,14 +60,15 @@ function resetGrid() {
 
 function resizeGrid() {
   gridSize = prompt('Please enter a size for the new Grid. (Between 1 and 64)');
-  if (gridSize > 64) {
+  if (gridSize > 1000) {
     resizeGrid();
-  } else if (gridSize && typeof gridSize === 'number') {
+  } else if (gridSize && (typeof Number(gridSize) === 'number')) {
     while(container.firstChild) {                           // Remove old divs and redraw the grid only if a number lower than 65 was entered
       container.firstChild.remove();
     }
     createGrid(gridSize);
   } else {                                                  // So you can cancel the Resizing
+    console.log(typeof gridSize)
     return
   }
 
@@ -91,13 +92,13 @@ function RandomColor() {
 
   if (randomColorsActivated) {                              // If it got activated attach the randomColor event listener and remove old one
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', vanish);
-      pixel.addEventListener('mouseenter', randomColor);
+      pixel.removeEventListener('mouseover', vanish);
+      pixel.addEventListener('mouseover', randomColor);
     });
   } else {                                                  // If it got deactivated do the reverse
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', randomColor);
-      pixel.addEventListener('mouseenter', vanish);
+      pixel.removeEventListener('mouseover', randomColor);
+      pixel.addEventListener('mouseover', vanish);
     });
   }
 }
@@ -124,13 +125,13 @@ function Gradient() {
 
   if (gradientActivated) {
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', vanish);
-      pixel.addEventListener('mouseenter', gradient);
+      pixel.removeEventListener('mouseover', vanish);
+      pixel.addEventListener('mouseover', gradient);
     });
   } else {
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', gradient);
-      pixel.addEventListener('mouseenter', vanish);
+      pixel.removeEventListener('mouseover', gradient);
+      pixel.addEventListener('mouseover', vanish);
     });
   }
 }
