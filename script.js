@@ -9,7 +9,7 @@ function createGrid(size) {
     let div = document.createElement('div');
     div.classList.add('pixel');                               // Give every little div the class .pixel
     div.addEventListener('mouseover', vanish);               // attach the default EventListener
-    div.addEventListener('touchmove', vanish);
+    div.addEventListener('touchstart', vanish);
     container.appendChild(div);                               // Append Elements to container
   }
 
