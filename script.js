@@ -7,7 +7,6 @@ const randomColorButton = document.getElementById('randomColorButton');
 function createGrid(size) {
   for (let i = 0; i < (size**2); i++) {
     let div = document.createElement('div');
-    // div.innerHTML = i;
     div.classList.add('pixel');                               // Give every little div the class .pixel
     div.addEventListener('mouseenter', vanish);               // attach the default EventListener
     container.appendChild(div);                               // Append Elements to container
